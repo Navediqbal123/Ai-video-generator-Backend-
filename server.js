@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// CORS allow
+// ✅ CORS allow
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -14,6 +14,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// ✅ Root route for testing
+app.get("/", (req, res) => {
+  res.send("✅ Server is running fine!");
+});
+
+// ✅ Generate route
 app.post("/generate", async (req, res) => {
   try {
     const { prompt } = req.body;
@@ -53,4 +59,4 @@ app.post("/generate", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
